@@ -25,8 +25,14 @@ export default class DailyTimerUsage extends React.Component {
       }
     }
 
-    this.minutes = Math.floor(this.todaysUsage.screenTime/60);
-    this.seconds = Math.floor(this.todaysUsage.screenTime%60);
+    if (this.todaysUsage.screenTime == null) {
+      this.minutes = 0;
+      this.seconds = 0;
+    }
+    else {
+      this.minutes = Math.floor(this.todaysUsage.screenTime/60);
+      this.seconds = Math.floor(this.todaysUsage.screenTime%60);
+    }
   }
 
   render() {
@@ -46,18 +52,29 @@ export default class DailyTimerUsage extends React.Component {
     else {
       minuteStr = 'minutes'
     }
+
+
+    let breaks = 0;
+    if (this.todaysUsage.timerCount != null) {
+      breaks = this.todaysUsage.timerCount;
+    }
+
+
     
     return (
-      <div style={{alignItems: 'center', verticalAlign: 'center'}}>
+      <div style={{textAlign: 'center', marginTop: 50}}>
         {/* Screen Usage Duration */}
         <Text variant={"xxLarge"} block>
-          Smart Screen  Usage : 
-            <span style={{color: 'green'}}> {this.minutes} {minuteStr} {this.seconds} seconds</span> 
+          Today's Timer Usage
         </Text>
+        <Text variant={"xLarge"} style={{marginTop: 25}} block>
+          <div style={{color: 'green'}}> {this.minutes} {minuteStr} {this.seconds} seconds</div> 
+        </Text>
+
         {/*  Number of Breaks */}
-        <Text variant={"xxLarge"} block>
+        <Text variant={"xxLarge"} style={{marginTop: 25}} block>
           You've taken 
-          <span style={{color: 'green'}}> {this.todaysUsage.timerCount} </span> 
+          <span style={{color: 'green'}}> {breaks} </span> 
           {endingBreakStr}
         </Text>
       </div>
