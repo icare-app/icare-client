@@ -1,7 +1,7 @@
 import React from "react";
-import { Bar, defaults } from "react-chartjs-2"
+import { defaults } from "react-chartjs-2"
 import { Text } from '@fluentui/react/lib/Text';
-
+import CountUp from 'react-countup';
 defaults.global.tooltips.enabled = true;
 
 export default class DailyTimerUsage extends React.Component {
@@ -45,21 +45,15 @@ export default class DailyTimerUsage extends React.Component {
     else {
       endingBreakStr = 'breaks today';
     }
-    // same logic for the word minute
+    minuteStr = 'minutes';
     if (this.minutes == 1) {
       minuteStr = 'minute'
     }
-    else {
-      minuteStr = 'minutes'
-    }
-
 
     let breaks = 0;
     if (this.todaysUsage.timerCount != null) {
       breaks = this.todaysUsage.timerCount;
     }
-
-
     
     return (
       <div style={{textAlign: 'center', marginTop: 50}}>
@@ -67,15 +61,19 @@ export default class DailyTimerUsage extends React.Component {
         <Text variant={"xxLarge"} block>
           Today's Timer Usage
         </Text>
-        <Text variant={"xLarge"} style={{marginTop: 25}} block>
-          <div style={{color: 'green'}}> {this.minutes} {minuteStr} {this.seconds} seconds</div> 
+        <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+          <div style={{color: 'green'}}>
+              <CountUp start={0} end={this.minutes} /> {minuteStr} { } 
+              <CountUp start={0} end={this.seconds} /> seconds
+          </div> 
         </Text>
-
         {/*  Number of Breaks */}
         <Text variant={"xxLarge"} style={{marginTop: 25}} block>
           You've taken 
-          <span style={{color: 'green'}}> {breaks} </span> 
-          {endingBreakStr}
+          <span style={{color: 'green'}}>
+            <CountUp start={0} end={breaks} /> 
+          </span>  
+          {} {endingBreakStr}
         </Text>
       </div>
     );
