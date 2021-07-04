@@ -69,11 +69,11 @@ export default class DailyTimerUsage extends React.Component {
         </Text>
         {/*  Number of Breaks */}
         <Text variant={"xxLarge"} style={{marginTop: 25}} block>
-          You've taken 
+          You've taken { }
           <span style={{color: 'green'}}>
             <CountUp start={0} end={breaks} /> 
           </span>  
-          {} {endingBreakStr}
+          { } {endingBreakStr}
         </Text>
       </div>
     );
