@@ -1,5 +1,5 @@
 import React from "react";
-import { Pie, defaults} from "react-chartjs-2";
+import { Bar, defaults} from "react-chartjs-2";
 
 defaults.global.tooltips.enabled = true;
 
@@ -30,26 +30,27 @@ export default class DailyAppUsage extends React.Component {
   render() {
     return (
       <div>
-        <Pie
+        <Bar
           data={{
             labels: this.labels,
             datasets: [
               {
+                label: "Seconds",
                 data: this.usage,
                 backgroundColor: [
-                  "rgba(255, 99, 132, 0.2)",
-                  "rgba(54, 162, 235, 0.2)",
-                  "rgba(255, 206, 86, 0.2)",
-                  "rgb(219,112,147, 0.2)",
-                  "rgba(75, 192, 192, 0.2)",
-                  "rgba(153, 102, 255, 0.2)",
-                  "rgba(255, 159, 64, 0.2)",
-                  "rgba(30, 130, 76, 0.2)",
-                  "rgba(0, 30, 128, 0.2)",
-                  "rgba(149, 165, 166, 0.2)",
-                  "rgba(230, 25, 75, 0.2)",
-                  "rgba(220, 190, 225, 0.2)",
-                  "rgba(245, 130, 48, 0.2)",
+                  "rgba(255, 99, 132, 0.5)",
+                  "rgba(54, 162, 235, 0.5)",
+                  "rgba(255, 206, 86, 0.5)",
+                  "rgb(219,112,147, 0.5)",
+                  "rgba(75, 192, 192, 0.5)",
+                  "rgba(153, 102, 255, 0.5)",
+                  "rgba(255, 159, 64, 0.5)",
+                  "rgba(30, 130, 76, 0.5)",
+                  "rgba(0, 30, 128, 0.5)",
+                  "rgba(149, 165, 166, 0.5)",
+                  "rgba(230, 25, 75, 0.5)",
+                  "rgba(220, 190, 225, 0.5)",
+                  "rgba(245, 130, 48, 0.5)",
                 ],
                 borderColor: [
                   "rgba(255, 99, 132, 1)",
@@ -75,9 +76,24 @@ export default class DailyAppUsage extends React.Component {
           options={{
             title: {
               display: true,
-              text: "Daily App Usage (Seconds)",
+              text: "Today's Most Used Apps",
               fontColor: "#FFFFFF",
               fontSize: 20,
+            },
+            scales: {
+              yAxes: [
+                {
+                  ticks: {
+                    beginAtZero: true,
+                    fontColor: "#FFFFFF",
+                  },
+                },
+              ],
+              xAxes: [
+                {
+                  ticks: { fontColor: "#FFFFFF" },
+                },
+              ],
             },
             maintainAspectRatio: false,
             legend: {
