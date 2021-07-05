@@ -1,17 +1,14 @@
 import React from "react";
 import { Bar, defaults } from "react-chartjs-2"
-
 defaults.global.tooltips.enabled = true;
-
-const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
 
 export default class BarChart extends React.Component {
 
   constructor(props) {
     super(props);
 
-    // Get Weekly App Usage from Electron store
-    var usage= store.dataUsage.getAll().fetched.appUsage;
+    // Get Weekly App Usage (unsynced w/ db)
+    var usage = store.dataUsage.getAll().fetched.appUsage;
 
     // Get top 5 most used apps 
     // Kinda Spaghetti Code 
@@ -19,6 +16,7 @@ export default class BarChart extends React.Component {
       "data": [
       ]
     };
+
     for (var i=0; i<usage.length; i++) {
       mostUsed["data"].push(
         {

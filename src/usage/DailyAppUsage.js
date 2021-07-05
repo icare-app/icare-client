@@ -8,35 +8,55 @@ export default class DailyAppUsage extends React.Component {
   constructor(props) {
     super(props);
 
-    // Get data usage values.
-    let usage = store.dataUsage.getAll();
-    this.appUsage = usage.fetched.appUsage;
-
-    // Get apps names & usage from unsynced.
-    this.labels = [];
-    this.usage = [];
     var today = getToday() + 'T00:00:00.000Z'
-    console.log(today)
-    for (var i=0; i < this.appUsage.length; i++) {
-      if (this.appUsage[i].usageDate == today) {
-        this.labels.push(this.appUsage[i].appName);
-        var seconds = this.appUsage[i].appTime / 1000;
-        var minutes = Math.floor(seconds / 60);
-        this.usage.push(minutes);
-        }
+
+    // Get Daily App Usage (unsynced w/ db)
+    var usage = store.dataUsage.getAll().fetched.appUsage;
+    
+    // Get top n most used apps.
+    var mostUsed = {
+      "data": [
+      ]
+    };
+
+    for (var i=0; i<usage.length; i++) {
+      if (usage[i].usageDate == today) {
+        mostUsed["data"].push({
+          appName: usage[i].appName,
+          appTime: usage[i].appTime,
+        })
       }
     }
+
+    let sorted = arr => {
+      const sorter = (a, b) => {
+        return a.appTime - b.appTime;
+      };
+      arr['data'].sort(sorter);
+      return arr;
+    }
+    sorted(mostUsed);
+    var top = mostUsed["data"].slice(-7);
+    this.appNames = [];
+    this.appTimes = [];
+    for (var i=0; i<top.length; i++) {
+      this.appNames.push(top[i].appName);
+      // convert ms to seconds
+      var mins = Math.floor(top[i].appTime / 60000);
+      this.appTimes.push(mins);
+    };
+  }
 
   render() {
     return (
       <div>
         <Bar
           data={{
-            labels: this.labels,
+            labels: this.appNames,
             datasets: [
               {
-                label: "Seconds",
-                data: this.usage,
+                label: "Minutes",
+                data: this.appTimes,
                 backgroundColor: [
                   "rgba(255, 99, 132, 0.5)",
                   "rgba(54, 162, 235, 0.5)",
@@ -72,7 +92,7 @@ export default class DailyAppUsage extends React.Component {
             ],
           }}
           height={400}
-          width={800}
+          width={30}
           options={{
             title: {
               display: true,
