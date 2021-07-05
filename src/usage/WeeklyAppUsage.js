@@ -10,15 +10,40 @@ export default class BarChart extends React.Component {
   constructor(props) {
     super(props);
 
-    // Get apps names & usage from unsynced.
-    this.labels = [];
-    this.usage = [];
-    this.appUsage = store.dataUsage.getAll().fetched.appUsage;
-    for (var i=0; i < this.appUsage.length; i++) {
-      this.labels.push(this.appUsage[i].appName);
-      var appTime = this.appUsage[i].appTime;
-      this.usage.push(Math.floor(appTime/60000));
+    // Get Weekly App Usage from Electron store
+    var usage= store.dataUsage.getAll().fetched.appUsage;
+
+    // Get top 5 most used apps 
+    // Kinda Spaghetti Code 
+    var mostUsed = {
+      "data": [
+      ]
+    };
+    for (var i=0; i<usage.length; i++) {
+      mostUsed["data"].push(
+        {
+          appName: usage[i].appName,
+          appTime: usage[i].appTime,
+        }
+      )
     }
+    let sorted = arr => {
+      const sorter = (a, b) => {
+        return a.appTime - b.appTime;
+      };
+      arr['data'].sort(sorter);
+      return arr;
+    }
+    sorted(mostUsed);
+    var top = mostUsed["data"].slice(-7);
+    this.appNames = [];
+    this.appTimes = [];
+    for (var i=0; i<top.length; i++) {
+      this.appNames.push(top[i].appName);
+      // convert ms to seconds
+      var mins = Math.floor(top[i].appTime / 60000);
+      this.appTimes.push(mins);
+    };
   }
 
   render() {
@@ -26,11 +51,11 @@ export default class BarChart extends React.Component {
       <div>
         <Bar
           data={{
-            labels: this.labels,
+            labels: this.appNames,
             datasets: [
               {
-                label: "Seconds",
-                data: this.usage,
+                label: "Minutes",
+                data: this.appTimes,
                 backgroundColor: [
                   "rgba(255, 99, 132, 0.5)",
                   "rgba(54, 162, 235, 0.5)",
