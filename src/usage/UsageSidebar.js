@@ -20,24 +20,24 @@ const groups = [
   {
     links: [
       {
-        name: 'Daily App Usage',
-        icon: 'Favicon',
-        key: 'daily_app_usage'
-      },
-      {
-        name: 'Weekly App Usage',
-        icon: 'Favicon',
-        key: 'weekly_app_usage'
-      },
-      {
         name: 'Daily Timer Usage',
         icon: 'GoToToday',
         key: 'daily_timer_usage'
       },
       {
+        name: 'Daily App Usage',
+        icon: 'Favicon',
+        key: 'daily_app_usage'
+      },
+      {
         name: 'Weekly Timer Usage',
         icon: 'CalendarWorkWeek',
         key: 'weekly_timer_usage'
+      },
+      {
+        name: 'Weekly App Usage',
+        icon: 'Favicon',
+        key: 'weekly_app_usage'
       },
     ],
   },

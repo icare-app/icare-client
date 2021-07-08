@@ -1,7 +1,7 @@
 import React from "react";
-import { Bar, defaults } from "react-chartjs-2"
+import { defaults } from "react-chartjs-2"
 import { Text } from '@fluentui/react/lib/Text';
-
+import CountUp from 'react-countup';
 defaults.global.tooltips.enabled = true;
 
 export default class DailyTimerUsage extends React.Component {
@@ -25,8 +25,14 @@ export default class DailyTimerUsage extends React.Component {
       }
     }
 
-    this.minutes = Math.floor(this.todaysUsage.screenTime/60);
-    this.seconds = Math.floor(this.todaysUsage.screenTime%60);
+    if (this.todaysUsage.screenTime == null) {
+      this.minutes = 0;
+      this.seconds = 0;
+    }
+    else {
+      this.minutes = Math.floor(this.todaysUsage.screenTime/60);
+      this.seconds = Math.floor(this.todaysUsage.screenTime%60);
+    }
   }
 
   render() {
@@ -39,26 +45,35 @@ export default class DailyTimerUsage extends React.Component {
     else {
       endingBreakStr = 'breaks today';
     }
-    // same logic for the word minute
+    minuteStr = 'minutes';
     if (this.minutes == 1) {
       minuteStr = 'minute'
     }
-    else {
-      minuteStr = 'minutes'
+
+    let breaks = 0;
+    if (this.todaysUsage.timerCount != null) {
+      breaks = this.todaysUsage.timerCount;
     }
     
     return (
-      <div style={{alignItems: 'center', verticalAlign: 'center'}}>
+      <div style={{textAlign: 'center', marginTop: 50}}>
         {/* Screen Usage Duration */}
         <Text variant={"xxLarge"} block>
-          Smart Screen  Usage : 
-            <span style={{color: 'green'}}> {this.minutes} {minuteStr} {this.seconds} seconds</span> 
+          Today's Timer Usage
+        </Text>
+        <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+          <div style={{color: 'green'}}>
+              <CountUp start={0} end={this.minutes} /> {minuteStr} { } 
+              <CountUp start={0} end={this.seconds} /> seconds
+          </div> 
         </Text>
         {/*  Number of Breaks */}
-        <Text variant={"xxLarge"} block>
-          You've taken 
-          <span style={{color: 'green'}}> {this.todaysUsage.timerCount} </span> 
-          {endingBreakStr}
+        <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+          You've taken { }
+          <span style={{color: 'green'}}>
+            <CountUp start={0} end={breaks} /> 
+          </span>  
+          { } {endingBreakStr}
         </Text>
       </div>
     );
