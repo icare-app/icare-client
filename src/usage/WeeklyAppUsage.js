@@ -12,11 +12,11 @@ export default class BarChart extends React.Component {
 
     // Get top 5 most used apps 
     // Kinda Spaghetti Code 
+
     var mostUsed = {
       "data": [
       ]
     };
-
     for (var i=0; i<usage.length; i++) {
       mostUsed["data"].push(
         {
@@ -113,7 +113,7 @@ export default class BarChart extends React.Component {
             },
             maintainAspectRatio: false,
             legend: {
-              position: "right",
+              position: "top",
               labels: {
                 fontSize: 15,
                 fontColor: "#FFFFFF",

@@ -117,7 +117,7 @@ export default class DailyAppUsage extends React.Component {
             },
             maintainAspectRatio: false,
             legend: {
-              position: "right",
+              position: "top",
               labels: {
                 fontSize: 15,
                 fontColor: "#FFFFFF",
