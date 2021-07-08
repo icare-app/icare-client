@@ -20,7 +20,7 @@ export default class BarChart extends React.Component {
     this.breaks = [];
 
     const weekdays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"]
-    for (var i=0; i<weekdays.length; i++) {
+    for (var i=weekdays.length-1; i>=0; i--) {
       var day = new Date();
       // get i'th day before today. 
       day.setDate(day.getDate() - i);
