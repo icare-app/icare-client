@@ -16,7 +16,6 @@ export default class DailyTimerUsage extends React.Component {
 
     // Get todays timer usage from list of days.
     var todaysDate = getToday() + 'T00:00:00.000Z';
-    console.log('todaysDate : ' + todaysDate);
     var i, usageObj;
     for (i=0; i<timerUsageList.length; i++) {
       usageObj = timerUsageList[i];
@@ -30,8 +29,8 @@ export default class DailyTimerUsage extends React.Component {
       this.seconds = 0;
     }
     else {
-      this.minutes = Math.floor(this.todaysUsage.screenTime/60);
-      this.seconds = Math.floor(this.todaysUsage.screenTime%60);
+      this.minutes = Math.floor(this.todaysUsage.screenTime/60000);
+      this.seconds = Math.floor(this.todaysUsage.screenTime%60000);
     }
   }
 

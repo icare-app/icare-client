@@ -230,17 +230,7 @@ ipcMain.handle('push-data-usage', async () => {
     const successCallback = () => {
         // Clear unsynced data
         store.set('dataUsage.unsynced.timerUsage', []);
-        // store.set('dataUsage.pushed.appUsage', store.get('dataUsage.unsynced.appUsage'));
     }
-
-    // var appUsage = store.get('dataUsage.unsynced.appUsage');
-    // var lastPushed = store.get('dataUsage.pushed.appUsage')
-    // for (var i=0; i<appUsage.length; i++) {
-    //     appUsage[i].appTime -= lastPushed[i].appTime;
-    // };
-
-    // console.log(appUsage);
-
     const data = {
         timerUsage: store.get('dataUsage.unsynced.timerUsage'),
         appUsage: store.get('dataUsage.unsynced.appUsage')
