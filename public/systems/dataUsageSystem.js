@@ -45,9 +45,9 @@ module.exports = function () {
                     appTime: foundEntry.appTime + process.duration,
                     usageDate: timestamp
                 })
+                console.log(appNamesDict[processPath] + " entry : " + (foundEntry.appTime + process.duration));
             }
         })
-
         global.store.set('dataUsage.unsynced.appUsage', appUsage)
     }
 
