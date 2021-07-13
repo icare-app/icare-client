@@ -8,8 +8,7 @@ import {
 import UsageSidebar from './UsageSidebar';
 import DailyAppUsage from './DailyAppUsage';
 import WeeklyAppUsage from './WeeklyAppUsage';
-import DailyTimerUsage from './DailyTimerUsage'
-import WeeklyTimerUsage from './WeeklyTimerUsage';
+import TimerUsage from './TimerUsage'
 
 const divStyle = {
   paddingTop: '10px',
@@ -20,8 +19,7 @@ const divStyle = {
 const usagePages = {
   daily_app_usage: <DailyAppUsage/>,
   weekly_app_usage: <WeeklyAppUsage/>,
-  daily_timer_usage: <DailyTimerUsage/>,
-  weekly_timer_usage: <WeeklyTimerUsage/>,
+  timer_usage: <TimerUsage/>,
 }
 
 export default class UsageScreen extends React.Component {
@@ -30,7 +28,7 @@ export default class UsageScreen extends React.Component {
     super(props);
     this.state = { 
       isSignedIn: store.accounts.getAll().token !== null,
-      selectedKey: 'daily_timer_usage' 
+      selectedKey: 'timer_usage' 
     };
   }
 
