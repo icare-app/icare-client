@@ -30,11 +30,10 @@ export default class BarChart extends React.Component {
         var formatted = this.getFormatted(day);
         if (usageDay == formatted) {
           this.labels.push(weekdays[day.getDay()]);
-          this.usage.push(usage[j].screenTime);
+          this.usage.push(usage[j].screenTime/60000);
           this.breaks.push(usage[j].timerCount);
         }
       }
-      console.log(usage);
     }
   }
 

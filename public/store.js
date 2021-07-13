@@ -230,9 +230,7 @@ ipcMain.handle('push-data-usage', async () => {
     const successCallback = () => {
         // Clear unsynced data
         store.set('dataUsage.unsynced.timerUsage', []);
-        store.set('dataUsage.unsynced.appUsage', []);
     }
-
     const data = {
         timerUsage: store.get('dataUsage.unsynced.timerUsage'),
         appUsage: store.get('dataUsage.unsynced.appUsage')

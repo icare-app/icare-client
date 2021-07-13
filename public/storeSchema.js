@@ -179,11 +179,14 @@ const dataUsageSchema = {
     default: {
         unsynced: {
             appUsage: [],
-            timerUsage: []
+            timerUsage: [],
         },
         fetched: {
             appUsage: [],
             timerUsage: []
+        },
+        pushed: {
+            appUsage: [],
         }
     },
 

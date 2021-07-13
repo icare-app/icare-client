@@ -47,7 +47,6 @@ module.exports = function () {
                 })
             }
         })
-
         global.store.set('dataUsage.unsynced.appUsage', appUsage)
     }
 
