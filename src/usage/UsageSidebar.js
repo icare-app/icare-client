@@ -20,7 +20,7 @@ const groups = [
   {
     links: [
       {
-        name: 'My Timer Usage',
+        name: 'Timer Usage',
         icon: 'GoToToday',
         key: 'timer_usage'
       },
