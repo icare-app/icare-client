@@ -8,49 +8,43 @@ export default class DailyAppUsage extends React.Component {
   constructor(props) {
     super(props);
 
-    var usage = store.dataUsage.getAll().fetched.appUsage;
-
     var today = getToday() + 'T00:00:00.000Z'
 
-    var todaysUsage = usage.filter(obj => {
-      return (obj.usageDate === today);
-    })
-
-    console.log(todaysUsage);
-
+    // Get Daily App Usage (unsynced w/ db)
+    var usage = store.dataUsage.getAll().fetched.appUsage;
     
     // Get top n most used apps.
-    // var mostUsed = {
-    //   "data": [
-    //   ]
-    // };
+    var mostUsed = {
+      "data": [
+      ]
+    };
 
-    // for (var i=0; i<usage.length; i++) {
-    //   if (usage[i].usageDate == today) {
-    //     mostUsed["data"].push({
-    //       appName: usage[i].appName,
-    //       appTime: usage[i].appTime,
-    //     })
-    //   }
-    // }
+    for (var i=0; i<usage.length; i++) {
+      if (usage[i].usageDate == today) {
+        mostUsed["data"].push({
+          appName: usage[i].appName,
+          appTime: usage[i].appTime,
+        })
+      }
+    }
 
-    // let sorted = arr => {
-    //   const sorter = (a, b) => {
-    //     return a.appTime - b.appTime;
-    //   };
-    //   arr['data'].sort(sorter);
-    //   return arr;
-    // }
-    // sorted(mostUsed);
-    // var top = mostUsed["data"].slice(-7);
-    // this.appNames = [];
-    // this.appTimes = [];
-    // for (var i=0; i<top.length; i++) {
-    //   this.appNames.push(top[i].appName);
-    //   // convert ms to seconds
-    //   var mins = Math.floor(top[i].appTime / 60000);
-    //   this.appTimes.push(mins);
-    // };
+    let sorted = arr => {
+      const sorter = (a, b) => {
+        return a.appTime - b.appTime;
+      };
+      arr['data'].sort(sorter);
+      return arr;
+    }
+    sorted(mostUsed);
+    var top = mostUsed["data"].slice(-7);
+    this.appNames = [];
+    this.appTimes = [];
+    for (var i=0; i<top.length; i++) {
+      this.appNames.push(top[i].appName);
+      // convert ms to seconds
+      var mins = Math.floor(top[i].appTime / 60000);
+      this.appTimes.push(mins);
+    };
   }
 
   render() {
@@ -62,8 +56,7 @@ export default class DailyAppUsage extends React.Component {
             datasets: [
               {
                 label: "Minutes",
-                // data: this.appTimes,
-                data: [],
+                data: this.appTimes,
                 backgroundColor: [
                   "rgba(255, 99, 132, 0.5)",
                   "rgba(54, 162, 235, 0.5)",

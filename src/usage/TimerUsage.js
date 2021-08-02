@@ -53,45 +53,48 @@ export default class TimerUsage extends React.Component {
     return (
       <div style={{textAlign: 'center'}}>
 
-          {/* Daily Timer Usage*/}
-          <div style={{display: 'inline-block', padding: '5px'}}>
-            <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
-              Todays Timer Usage
-            </Text>
-            <Text variant={"xxLarge"} style={{marginTop: 25}} block>
-              <div style={{color: 'green'}}>
-                  {this.hoursStr}
-                  <CountUp start={0} end={this.mins} /> minutes { } 
-              </div> 
-            </Text>
-            <Text variant={"xxLarge"} style={{marginTop: 25}} block>
-              You've taken { }
-              <span style={{color: 'green'}}>
-                <CountUp start={0} end={this.breaksToday} /> 
-              </span>  
-              {this.todayStr}
-            </Text>
-          </div>
+        {/* Daily Timer Usage*/}
+        <div style={{display: 'inline-block', padding: '5px'}}>
+          <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
+            Todays Timer Usage
+          </Text>
+          <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+            <div style={{color: 'green'}}>
+                {this.hoursStr}
+                <CountUp start={0} end={this.mins} /> minutes { } 
+            </div> 
+          </Text>
+          <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+            You've taken { }
+            <span style={{color: 'green'}}>
+              <CountUp start={0} end={this.breaksToday} /> 
+            </span>  
+            {this.todayStr}
+          </Text>
+        </div>
 
-          {/* Weekly Timer Usage */}
+        {/* Weekly Timer Usage */}
+        {/* Only displayed if previous usage day exists */}
+        {this.hours != this.hoursWeek &&
           <div style={{marginTop: 50, display: 'inline-block', padding: '5px'}}>
-            <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
-              Weekly Timer Usage
-            </Text>
-            <Text variant={"xxLarge"} style={{marginTop: 25}} block>
-              <div style={{color: 'green'}}>
-                  {this.hoursWeekStr}
-                  <CountUp start={0} end={this.minsWeek} /> minutes { } 
-              </div> 
-            </Text>
-            <Text variant={"xxLarge"} style={{marginTop: 25}} block>
-              You've taken { }
-              <span style={{color: 'green'}}>
-                <CountUp start={0} end={this.breaksWeek} /> 
-              </span>  
-              {this.weekStr}
-            </Text>
-          </div>
+          <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
+            Weekly Timer Usage
+          </Text>
+          <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+            <div style={{color: 'green'}}>
+                {this.hoursWeekStr}
+                <CountUp start={0} end={this.minsWeek} /> minutes { } 
+            </div> 
+          </Text>
+          <Text variant={"xxLarge"} style={{marginTop: 25}} block>
+            You've taken { }
+            <span style={{color: 'green'}}>
+              <CountUp start={0} end={this.breaksWeek} /> 
+            </span>  
+            {this.weekStr}
+          </Text>
+        </div>
+        }
 
       </div>
     );
