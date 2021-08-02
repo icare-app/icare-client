@@ -56,7 +56,6 @@ export default class extends React.Component {
                     position: 'absolute', 
                     paddingTop: '12px', 
                     paddingLeft: '18px',
-                    textAlign: 'center',
                 }}>
 
                     <Stack horizontal token={{childrenGap: 32}}>
@@ -67,22 +66,15 @@ export default class extends React.Component {
                         <Stack.Item>
                             <Stack>
                                 <Text variant={'large'}> <b>Time for a break </b> </Text>
-                                    <Text variant={'medium'} align='center'>
-                                        {this.state.remainingTimeString}
-                                    </Text>
-                                <span style={{marginTop: '3px'}}>
-                                    <DefaultButton
-                                            text='Snooze'
-                                            iconProps={{ iconName: 'Snooze' }}
-                                            width='30'
-                                    />
-                                    <DefaultButton
-                                    text='End'
-                                    iconProps={{ iconName: 'Clear' }}
-                                    onClick={breakSys.endBreak}
-                                    width='30'
-                                    />
-                                </span>
+                                <Text variant={'medium'} align='center'>
+                                    {this.state.remainingTimeString}
+                                </Text>
+                                <DefaultButton
+                                text='End'
+                                iconProps={{ iconName: 'Clear' }}
+                                onClick={breakSys.endBreak}
+                                width='50'
+                                />
                             </Stack>
                         </Stack.Item>
                         

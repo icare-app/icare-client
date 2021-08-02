@@ -9,55 +9,59 @@ export default class TimerUsage extends React.Component {
   constructor(props) {
     super(props);
 
-    // Get todays timer usage
     var usage = store.dataUsage.getAll().fetched.timerUsage
+
+
+    // Get todays timer usage
     var todaysDate = getToday() + 'T00:00:00.000Z';
     var todaysUsage = usage.filter(obj => {
-      return obj.usageDate === todaysDate;
+      return (obj.usageDate === todaysDate);
     })
+    todaysUsage = todaysUsage[0]
+    var screenTime = (todaysUsage == null ? 0 : todaysUsage.screenTime)
+    var totalMins = (screenTime == null ? 0 : Math.floor(screenTime/60000))
+    this.hours = (totalMins == null ? 0 : Math.floor(totalMins/60));
+    this.mins = totalMins%60;
+    this.breaksToday = (todaysUsage == null ? 0 : todaysUsage.timerCount)
+    console.log('hours : ' + this.hours);
 
-    this.mins = 0;
-    this.secs = 0;
-    var screenTime = todaysUsage.screenTime;
-    if (screenTime != null) {
-      // convert millisec -> mins
-      this.mins = Math.floor(screenTime/60000);
-      // convert secs -> mins
-      this.secs = Math.floor(screenTime%60000);
-    }
-    this.breaksToday = 0;
-    if (todaysUsage.timerCount != null) { this.breaksToday = todaysUsage.timerCount };
-
-    // Get weekly timer usage
+    // Gets this week's timer usage
     var usageWeek = 0;
     this.breaksWeek = 0;
     for (var i=0; i<usage.length; i++) {
       usageWeek += usage[i].screenTime;
       this.breaksWeek += usage[i].timerCount;
     }
-    this.minsWeek = Math.floor(usageWeek/60000);
-    this.secsWeek = Math.floor(usageWeek%60000);
+    var totalMinsWeek = Math.floor(usageWeek/60000);
+    this.hoursWeek = Math.floor(totalMinsWeek/60);
+    this.minsWeek = totalMinsWeek%60;
+    console.log('hours week : ' + this.hours);
+
+    // Removes extra 's' from strings if needed.
+    // Avoids "You took 1 breaks" etc. 
+    this.todayStr = (this.breaksToday == 1 ? ' break today' : ' breaks today');
+    this.weekStr = (this.breaksWeek == 1 ? ' break this week' : ' breaks this week');
+    this.hoursStr = (this.hours == 1 ? ' 1 hour ' : (this.hours + ' hours '));
+    this.hoursWeekStr = (this.hoursWeek == 1 ? ' 1 hour ' : (this.hoursWeek + ' hours '));
+
+    if (this.hours == 0) this.hoursStr = ''
+    if (this.hoursWeek == 0) this.hoursWeekStr = '';
   }
 
   render() {
-    // Removes extra 's' from  "You took 1 breaks today" 
-    this.todayStr = ' breaks today'
-    if (this.breaksToday == 1) this.todayStr = ' break today';
-    this.weekStr = ' breaks this week';
-    if (this.breaksWeek == 1) this.weekStr = ' break this week'
-    
+
     return (
       <div style={{textAlign: 'center'}}>
 
           {/* Daily Timer Usage*/}
           <div style={{display: 'inline-block', padding: '5px'}}>
-            <Text variant={"xxLarge"} style={{border: '1px solid white'}} block>
+            <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
               Todays Timer Usage
             </Text>
             <Text variant={"xxLarge"} style={{marginTop: 25}} block>
               <div style={{color: 'green'}}>
+                  {this.hoursStr}
                   <CountUp start={0} end={this.mins} /> minutes { } 
-                  <CountUp start={0} end={this.secs} /> seconds
               </div> 
             </Text>
             <Text variant={"xxLarge"} style={{marginTop: 25}} block>
@@ -71,13 +75,13 @@ export default class TimerUsage extends React.Component {
 
           {/* Weekly Timer Usage */}
           <div style={{marginTop: 50, display: 'inline-block', padding: '5px'}}>
-            <Text variant={"xxLarge"} style={{border: '1px solid white'}} block>
+            <Text variant={"xxLarge"} style={{borderBottom: '1px solid white'}} block>
               Weekly Timer Usage
             </Text>
             <Text variant={"xxLarge"} style={{marginTop: 25}} block>
               <div style={{color: 'green'}}>
+                  {this.hoursWeekStr}
                   <CountUp start={0} end={this.minsWeek} /> minutes { } 
-                  <CountUp start={0} end={this.secsWeek} /> seconds
               </div> 
             </Text>
             <Text variant={"xxLarge"} style={{marginTop: 25}} block>
