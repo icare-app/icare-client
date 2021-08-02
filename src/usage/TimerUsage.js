@@ -11,7 +11,6 @@ export default class TimerUsage extends React.Component {
 
     var usage = store.dataUsage.getAll().fetched.timerUsage
 
-
     // Get todays timer usage
     var todaysDate = getToday() + 'T00:00:00.000Z';
     var todaysUsage = usage.filter(obj => {
