@@ -147,7 +147,12 @@ ipcMain.handle('timer-block', () => {
 // Get break status
 ipcMain.on('get-break-status', (event) => {
     event.reply('receive-break-status', global.breakSystem.getStatus());
-});
+}); 
+
+// End break
+ipcMain.on('end-break-btn', (event) => {
+    global.breakSystem.end();
+})
 
 // Play sound file
 ipcMain.handle('play-sound', () => {

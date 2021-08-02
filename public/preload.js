@@ -238,6 +238,7 @@ window.timer = {
 
 window.breakSys = {
     getStatus: () => { ipcRenderer.send('get-break-status') },
+    endBreak: () => { ipcRenderer.send('end-break-btn') },
     eventSystem: new EventSystem()
 }
 

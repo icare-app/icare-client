@@ -48,10 +48,6 @@ export default class extends React.Component {
         setInterval(breakSys.getStatus, 100);
     }
 
-    handleEndBtn() {
-
-    }
-
     render() {
         return (    
             <div style={divStyle}>
@@ -83,6 +79,7 @@ export default class extends React.Component {
                                     <DefaultButton
                                     text='End'
                                     iconProps={{ iconName: 'Clear' }}
+                                    onClick={breakSys.endBreak}
                                     width='30'
                                     />
                                 </span>
