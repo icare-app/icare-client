@@ -40,7 +40,7 @@ export default class TimerUsage extends React.Component {
   }
 
   render() {
-    // Removes extra s from  "You took 1 breaks today" 
+    // Removes extra 's' from  "You took 1 breaks today" 
     this.todayStr = ' breaks today'
     if (this.breaksToday == 1) this.todayStr = ' break today';
     this.weekStr = ' breaks this week';

@@ -4,7 +4,8 @@ import {
     mergeStyles,
     FontIcon,
     Stack,
-    Text 
+    Text,
+    DefaultButton
 } from '@fluentui/react';
 
 const divStyle = {
@@ -33,7 +34,7 @@ export default class extends React.Component {
             var milliseconds = breakStatus.remainingTime;
             var seconds = Math.floor((milliseconds % 60000) / 1000);
 
-            var remainingTimeString = seconds === 1 ? `${seconds} more second` : `${seconds} more seconds`
+            var remainingTimeString = seconds === 1 ? `${seconds} second left` : `${seconds} seconds remaining`
 
             this.setState({
                 remainingTimeString: remainingTimeString,
@@ -54,7 +55,8 @@ export default class extends React.Component {
                 <div style={{
                     position: 'absolute', 
                     paddingTop: '12px', 
-                    paddingLeft: '18px'
+                    paddingLeft: '18px',
+                    textAlign: 'center',
                 }}>
 
                     <Stack horizontal token={{childrenGap: 32}}>
@@ -64,11 +66,22 @@ export default class extends React.Component {
 
                         <Stack.Item>
                             <Stack>
-                                <Text variant={'large'}> <b>Time for a break. </b> </Text>
-                                <Text variant={'medium'}> Look at something 20 feet away. </Text>
-                                <Text variant={'medium'} align='center'>
-                                    {this.state.remainingTimeString}
-                                </Text>
+                                <Text variant={'large'}> <b>Time for a break </b> </Text>
+                                    <Text variant={'medium'} align='center'>
+                                        {this.state.remainingTimeString}
+                                    </Text>
+                                <span style={{marginTop: '3px'}}>
+                                    <DefaultButton
+                                            text='Snooze'
+                                            iconProps={{ iconName: 'CloudUpload' }}
+                                            width='30'
+                                    />
+                                    <DefaultButton
+                                    text='Reset'
+                                    iconProps={{ iconName: 'CloudUpload' }}
+                                    width='30'
+                                    />
+                                </span>
                             </Stack>
                         </Stack.Item>
                         
