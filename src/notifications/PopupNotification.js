@@ -48,6 +48,10 @@ export default class extends React.Component {
         setInterval(breakSys.getStatus, 100);
     }
 
+    handleEndBtn() {
+
+    }
+
     render() {
         return (    
             <div style={divStyle}>
@@ -73,12 +77,12 @@ export default class extends React.Component {
                                 <span style={{marginTop: '3px'}}>
                                     <DefaultButton
                                             text='Snooze'
-                                            iconProps={{ iconName: 'CloudUpload' }}
+                                            iconProps={{ iconName: 'Snooze' }}
                                             width='30'
                                     />
                                     <DefaultButton
-                                    text='Reset'
-                                    iconProps={{ iconName: 'CloudUpload' }}
+                                    text='End'
+                                    iconProps={{ iconName: 'Clear' }}
                                     width='30'
                                     />
                                 </span>
