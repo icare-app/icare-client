@@ -50,7 +50,7 @@ export default class TimerUsage extends React.Component {
       <div style={{textAlign: 'center'}}>
 
           {/* Daily Timer Usage*/}
-          <div style={{border: '3px solid white'}}>
+          <div style={{display: 'inline-block', padding: '5px'}}>
             <Text variant={"xxLarge"} style={{border: '1px solid white'}} block>
               Todays Timer Usage
             </Text>
@@ -70,7 +70,7 @@ export default class TimerUsage extends React.Component {
           </div>
 
           {/* Weekly Timer Usage */}
-          <div style={{marginTop: 50, border: '3px solid white'}}>
+          <div style={{marginTop: 50, display: 'inline-block', padding: '5px'}}>
             <Text variant={"xxLarge"} style={{border: '1px solid white'}} block>
               Weekly Timer Usage
             </Text>
