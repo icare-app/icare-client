@@ -125,6 +125,7 @@ module.exports = function(){
         }, POPUP_NOTIF_DURATION);
     }
 
+
     /**
      * Ends the break and emits the 'break-end' event
      */

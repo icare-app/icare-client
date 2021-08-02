@@ -33,7 +33,7 @@ export default class extends React.Component {
 
         // Main button is a button to toggle the timer
         else {
-            mainButtonOnClick = timer.toggle;
+            mainButtonOnClick = timer.toggle; 
             if (this.props.isPaused) {
                 mainButtonTooltip = 'Start';
                 mainButtonIconName = 'Play';

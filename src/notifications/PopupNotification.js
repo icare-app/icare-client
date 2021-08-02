@@ -4,13 +4,15 @@ import {
     mergeStyles,
     FontIcon,
     Stack,
-    Text 
+    Text,
+    DefaultButton
 } from '@fluentui/react';
 
 const divStyle = {
     MozUserSelect: 'none',
     WebkitUserSelect: 'none',
     msUserSelect: 'none',
+    textAlign: 'center',
 };
 
 const iconClass = mergeStyles({
@@ -20,6 +22,8 @@ const iconClass = mergeStyles({
     marginRight: 12,
     color: 'deepskyblue'
 });
+
+const buttonStyle = { borderRadius: '10px', width: '120px', height: '30px',  marginLeft: '30px'};
 
 export default class extends React.Component {
 
@@ -33,7 +37,7 @@ export default class extends React.Component {
             var milliseconds = breakStatus.remainingTime;
             var seconds = Math.floor((milliseconds % 60000) / 1000);
 
-            var remainingTimeString = seconds === 1 ? `${seconds} more second` : `${seconds} more seconds`
+            var remainingTimeString = seconds === 1 ? `${seconds}s` : `${seconds}s`
 
             this.setState({
                 remainingTimeString: remainingTimeString,
@@ -54,21 +58,31 @@ export default class extends React.Component {
                 <div style={{
                     position: 'absolute', 
                     paddingTop: '12px', 
-                    paddingLeft: '18px'
+                    paddingLeft: '18px',
                 }}>
 
-                    <Stack horizontal token={{childrenGap: 32}}>
+                    <Stack horizontal token={{childrenGap: 50}}>
                         <Stack.Item>
                             <FontIcon iconName='RedEye' className={iconClass} />
                         </Stack.Item>
 
                         <Stack.Item>
                             <Stack>
-                                <Text variant={'large'}> <b>Time for a break. </b> </Text>
-                                <Text variant={'medium'}> Look at something 20 feet away. </Text>
-                                <Text variant={'medium'} align='center'>
-                                    {this.state.remainingTimeString}
-                                </Text>
+                                <Text variant={'large'} style={{marginBottom: '3px'}}> <b>Time for a break </b> </Text>
+                                <span>
+                                    <Text variant={'large'} align='center'>
+                                        <b>{this.state.remainingTimeString}</b>
+                                    </Text> 
+                                    <Text variant={'medium'}> remaining</Text> 
+                                    <DefaultButton
+                                    text='End'
+                                    iconProps={{ iconName: 'AlarmClock' }}
+                                    onClick={breakSys.endBreak}
+                                    style={buttonStyle}
+                                    width='100px'
+                                    />
+                                </span>
+                                <Text variant={'small'}> Timer resets upon mouse movement </Text>
                             </Stack>
                         </Stack.Item>
                         
