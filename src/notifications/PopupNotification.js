@@ -54,7 +54,6 @@ export default class extends React.Component {
     render() {
         return (    
             <div style={divStyle}>
-                
                 <div style={{
                     position: 'absolute', 
                     paddingTop: '12px', 
@@ -70,8 +69,8 @@ export default class extends React.Component {
                             <Stack>
                                 <Text variant={'large'} style={{marginBottom: '3px'}}> <b>Time for a break </b> </Text>
                                 <span>
-                                    <Text variant={'large'} align='center'>
-                                        <b>{this.state.remainingTimeString}</b>
+                                    <Text variant={'large'}>
+                                        {this.state.remainingTimeString}
                                     </Text> 
                                     <Text variant={'medium'}> remaining</Text> 
                                     <DefaultButton

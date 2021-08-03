@@ -18,13 +18,13 @@ require('./initializeSystems');
 require('./popupWindows');
 
 const DEFAULT_WINDOW_SIZE = {
-    defaultWidth: 860,
+    defaultWidth: 800,
     defaultHeight: 550,
 }
 
 const MAX_WINDOW_SIZE = {
-    width: 1280,
-    height: 800,
+    width: 1000,
+    height: 550,
 }
 
 global.mainWindow;
